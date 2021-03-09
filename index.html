@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Debouncing in JavaScript</title>
 </head>
+
 <body>
-  
+  <input type="button" id="debounce" value="Click Me">
+  <br /><br />
+  <i>
+    It will call after 2 seconds delay when clicking is stopped.
+    <br />
+    Basically It will avoid multiple time clicks.
+  </i>
+  <script>
+    var button = document.getElementById("debounce");
+    var debounce = (func, delay) => {
+      let Timer
+      return function () {
+        const context = this
+        const args = arguments
+        clearTimeout(Timer);
+        Timer = setTimeout(() =>
+          func.apply(context, args), delay)
+      }
+    }
+    button.addEventListener('click', debounce(function () {
+      alert("Calling API")
+    }, 2000));
+  </script>
 </body>
+
 </html>
